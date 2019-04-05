@@ -4,8 +4,9 @@ async function Init(){
 }
 function xml1(xml){
   var srt = ""
+  var atualPosition = 0
   const items = xml.getElementsByTagName("text")
-  for(var i = 10;i<items.length;i++){
+  for(var i = 0;i<items.length;i++){
     const item = items[i]
     const dur = item.getAttribute("dur")
     if(typeof item.childNodes[0] == "undefined"){
@@ -15,19 +16,20 @@ function xml1(xml){
       var text = item.childNodes[0].nodeValue
     }
     const start = item.getAttribute("start")
-    console.log(start)
-    console.log(text)
-    //const timeInicial = transforma_magicamente(start)
-    console.log(start)
-    
-    break;
+    const timeInicial = transforma_magicamente(start)
+
+    const timeFinal = transforma_magicamente(parseFloat(start)+parseFloat(dur))
+    console.log(timeFinal)
+    if(text == null){
+      console.log("null")
+      atualPosition = atualPosition+1
+      continue
+    }
+    const srtTemplante = atualPosition+"\n"+timeInicial+" --> "+timeFinal+"\n"+text+"\n"
+    console.log(srtTemplante)
   }
 }
 Init()
-/*
-function Regra de tres(x1,x2,x3,x4){
-  
-}
 function transforma_magicamente(s){
   function doisPonto(numero){
     var numero = numero+""
@@ -41,20 +43,28 @@ function transforma_magicamente(s){
     }
     return numero;
   }
-  if(parseFloat(s) > 0){
   hora = duas_casas(Math.round(s/3600));
   minuto = duas_casas(Math.round((s%3600)/60));
-  segundo = doisPonto(duas_casas((s%3600)%60))
+  segundo = duas_casas((s%3600)%60)
+  segundo= segundo+"";
+  if(segundo == "00"){
+    segundo = "00.000"
   }
-  else{
-    var hora = "00"
-    var segundo ="00"
-    var minuto = "00"
+  else if(segundo.length > 6){
+    segundo = segundo.slice(0,6)
     
   }
+  else if(segundo.length < 6){
+    var b = 6 - segundo.length
+    for(var i = 0 ;i < b;i++){
+      segundo += "0"
+    }
+  }
+  segundo = (segundo.slice(0,segundo.indexOf("."))+","+segundo.slice(segundo.indexOf(".")+1,segundo.length))
   formatado = hora+":"+minuto+":"+segundo
   return formatado;
 }
+/*
 function transformTime(time){
   
   var segundos = parseFloat(time);
