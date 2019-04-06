@@ -1,8 +1,4 @@
-async function Init(){
-  const input = await $.ajax("text.xml")
-  xml1(input)
-}
-function xml1(xml){
+function xmlLegendsToString(xml){
   var srt = ""
   var atualPosition = 0
   const items = xml.getElementsByTagName("text")
@@ -30,7 +26,7 @@ function xml1(xml){
   srt = srt.slice(0,-1)
   console.log(srt)
 }
-Init()
+
 
 var escaped_one_to_xml_special_map = {
   '&amp;': '&',
