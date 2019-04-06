@@ -19,17 +19,34 @@ function xml1(xml){
     const timeInicial = transforma_magicamente(start)
 
     const timeFinal = transforma_magicamente(parseFloat(start)+parseFloat(dur))
-    console.log(timeFinal)
     if(text == null){
-      console.log("null")
       atualPosition = atualPosition+1
       continue
     }
-    const srtTemplante = atualPosition+"\n"+timeInicial+" --> "+timeFinal+"\n"+text+"\n"
-    console.log(srtTemplante)
+    const srtTemplante = atualPosition+"\n"+timeInicial+" --> "+timeFinal+"\n"+decodeXml(text)+"\n\n"
+    srt += srtTemplante
+    atualPosition = atualPosition +1
   }
+  srt = srt.slice(0,-1)
+  console.log(srt)
 }
 Init()
+
+var escaped_one_to_xml_special_map = {
+  '&amp;': '&',
+  '&quot;': '"',
+  '&lt;': '<',
+  '&gt;': '>'
+};
+
+function decodeXml(string) {
+  return string.replace(/(&quot;|&lt;|&gt;|&amp;)/g,
+    function(str, item) {
+      return escaped_one_to_xml_special_map[item];
+    });
+}
+
+
 function transforma_magicamente(s){
   function doisPonto(numero){
     var numero = numero+""
