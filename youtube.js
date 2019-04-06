@@ -1,5 +1,5 @@
 class YouTube{
-  set Url(url){
+  Url(url){
     this.url = url;
     return this.verificateUrl();
   }
