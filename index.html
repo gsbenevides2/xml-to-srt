@@ -4,25 +4,81 @@
   <script src="//cdn.jsdelivr.net/npm/eruda" ></script>
   <script>eruda.init()</script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title></title>
 </head>
 <body>
-  
-  <!--form action="javascript:Submit()">
-    <textarea id="input"></textarea><br>
-    <button type="submit">Enviar</button>
-  </form-->
-  
+  <div class="container">
+    <h2 class="text-center mt-4">Download de Legendas do Youtube</h2>
+    <div class="container">
+      <form id="form1">
+        <div class="card rounded-lg">
+          <div class="card-body">
+            <div class="form-group">
+              <label for="urlLabel">Insira a Url</label>
+              <input placeholder="Youtube Url" id ="urlLabel"  aria-describedby="urlHelper" class="form-control">
+              <small id="urlHelper"></small>
+            </div>
+            <div class="d-flex justify-content-end">
+              <button class="btn btn-primary" type="submit">Enviar</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="modal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">
+            Titulo da Modal
+          </h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form>
+        <div class="modal-body">
+          <div class="noVideo d-none">
+            <div class="alert alert-danger">Video não Encontrado</div>
+          </div>
+          <div class="yesVideo d-none">
+            <img id="videoImage" class="w-100">
+            <p><br>
+              <b>Nome do Video: </b><span id="videoName"></span><br>
+              <b>Nome do Canal: </b><span id="videoChannel"></span><br>
+              <b>Duração: </b><span id="videoDuration"></span>
+            </p>
+            <div class="noLegends d-none">
+              <div class="alert alert-danger">Esse video não tem legemdas</div>
+            </div>
+            <div class="yesLegends d-none">
+              <div class="form-group">
+                <label for="legendSelect">Selecione a Legenda</label>
+                <select class="form-control" id="legendSelect">
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="translateSelect">Selecione a Lingua</label>
+                <select class="form-control" id="translateSelect">
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+          <button type="submit" class="btn btn-primary">Download</button>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
   <script src="xml.js" ></script>
-  <script>
-  async function Init(){
-    const result = await $.ajax("text.xml")
-    console.log(result)
-    var xml = new xml (result)
-  }
-  Init()
-  </script>
 </body>
 </html>
