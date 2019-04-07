@@ -10,16 +10,9 @@ class xml{
         }
         return numero;
       }
-      /*
-      const hora = duas_casas(Math.round(s/3600));
-      const minuto = duas_casas(Math.round((s%3600)/120));
-      console.debug(minuto)
-      var segundo = duas_casas((s%3600)%60);
-      segundo= segundo+"";
-      */
-      var minutos = parseInt(s/60)
-      var hora = duas_casas(parseInt(s/3600));
-      var minuto = duas_casas(minutos - (60*hora));
+      const minutos = parseInt(s/60)
+      const hora = duas_casas(parseInt(s/3600));
+      const minuto = duas_casas(minutos - (60*hora));
       var segundo = (s - (60*minutos))+""
       if(segundo== "0"){
         segundo = "00.000";
@@ -70,15 +63,6 @@ class xml{
       const start = item.getAttribute("start");
       const timeInicial = transforma_magicamente(start);
       const timeFinal = transforma_magicamente(parseFloat(start)+parseFloat(dur));
-      /*console.debug("-----")
-      console.log(i)
-      console.log(atualPosition)
-      console.log(text)
-      console.log(dur)
-      console.log(start)
-      console.log(timeInicial)
-      console.log(timeFinal)
-      console.log(parseFloat(start)+parseFloat(dur))*/
       if(text == null){
         atualPosition = atualPosition + 1;
         continue;
