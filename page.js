@@ -7,7 +7,7 @@ class page{
       pageElement.labelAltered()
     });
     $("#form").submit(()=>{
-      page.submit()
+      pageElement.submit()
       return false;
     })
     
@@ -24,7 +24,10 @@ class page{
       $("#urlHelper").removeClass("d-none")
     }
   }
-  submit(){
-    
+  async submit(){
+    const data = await this.YouTube.VideoData()
+    if(data == null){
+      
+    }
   }
 }

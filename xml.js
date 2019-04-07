@@ -10,16 +10,16 @@ class xml{
         }
         return numero;
       }
-      const minutos = parseInt(s/60)
+      const minutos = parseInt(s/60);
       const hora = duas_casas(parseInt(s/3600));
       const minuto = duas_casas(minutos - (60*hora));
-      var segundo = (s - (60*minutos))+""
+      var segundo = (s - (60*minutos))+"";
       if(segundo== "0"){
         segundo = "00.000";
       }
       
-      var segundoArray = segundo.split(".")
-      segundoArray[0]= duas_casas(segundoArray[0])
+      var segundoArray = segundo.split(".");
+      segundoArray[0]= duas_casas(segundoArray[0]);
       
       if(segundoArray[1].length > 3){
         segundoArray[1] = segundoArray[1].slice(0,3);
@@ -32,7 +32,7 @@ class xml{
         }
       }
       //
-      segundo = segundoArray.join(",")
+      segundo = segundoArray.join(",");
       const formatado = hora + ":" + minuto + ":" + segundo;
       return formatado;
     }

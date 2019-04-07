@@ -1,7 +1,6 @@
 
 $(document).ready(()=>{
-  //pageElement = new page()
-  Init()
+  pageElement = new page()
 })
 async function Init(){
   var xmlText = await $.ajax("https://video.google.com/timedtext?type=track&v=DXK62DVgNMo&name=CC (English)&lang=en&tlang=pt");
