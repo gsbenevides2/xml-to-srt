@@ -10,24 +10,36 @@ class xml{
         }
         return numero;
       }
+      /*
       const hora = duas_casas(Math.round(s/3600));
-      const minuto = duas_casas(Math.round((s%3600)/60));
+      const minuto = duas_casas(Math.round((s%3600)/120));
+      console.debug(minuto)
       var segundo = duas_casas((s%3600)%60);
       segundo= segundo+"";
-      if(segundo == "00"){
+      */
+      var minutos = parseInt(s/60)
+      var hora = duas_casas(parseInt(s/3600));
+      var minuto = duas_casas(minutos - (60*hora));
+      var segundo = (s - (60*minutos))+""
+      if(segundo== "0"){
         segundo = "00.000";
       }
-      else if(segundo.length > 6){
-        segundo = segundo.slice(0,6);
+      
+      var segundoArray = segundo.split(".")
+      segundoArray[0]= duas_casas(segundoArray[0])
+      
+      if(segundoArray[1].length > 3){
+        segundoArray[1] = segundoArray[1].slice(0,3);
         
       }
-      else if(segundo.length < 6){
-        var b = 6 - segundo.length;
+      else if(segundoArray[1].length < 6){
+        var b = 3 - segundoArray[1].length;
         for(var i = 0 ;i < b;i++){
-          segundo += "0";
+          segundoArray[1] += "0";
         }
       }
-      segundo = (segundo.slice(0,segundo.indexOf(".")) + "," + segundo.slice(segundo.indexOf(".") + 1,segundo.length));
+      //
+      segundo = segundoArray.join(",")
       const formatado = hora + ":" + minuto + ":" + segundo;
       return formatado;
     }
@@ -44,7 +56,7 @@ class xml{
         });
     }
     var srt = "";
-    var atualPosition = 0;
+    var atualPosition = 1;
     const items = this._xml.getElementsByTagName("text");
     for(var i = 0;i<items.length;i++){
       const item = items[i];
@@ -58,6 +70,15 @@ class xml{
       const start = item.getAttribute("start");
       const timeInicial = transforma_magicamente(start);
       const timeFinal = transforma_magicamente(parseFloat(start)+parseFloat(dur));
+      /*console.debug("-----")
+      console.log(i)
+      console.log(atualPosition)
+      console.log(text)
+      console.log(dur)
+      console.log(start)
+      console.log(timeInicial)
+      console.log(timeFinal)
+      console.log(parseFloat(start)+parseFloat(dur))*/
       if(text == null){
         atualPosition = atualPosition + 1;
         continue;
