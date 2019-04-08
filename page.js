@@ -1,7 +1,6 @@
 class page{
   constructor(){
     this.YouTube = new YouTube();
-    
     //InputChange
     $("#urlLabel").change(()=>{
       pageElement.labelAltered()
