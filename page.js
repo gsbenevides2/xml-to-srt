@@ -37,6 +37,7 @@ class page{
       $("#videoDuration").html(data.time.minutos +":"+ data.time.segundos);
       $("#videoImage").prop("src",data.image);
     }
+    console.log(await this.YouTube.legendsData());
     $(".modal").modal("show")
   }
 }
