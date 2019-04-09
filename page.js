@@ -24,9 +24,19 @@ class page{
     }
   }
   async submit(){
-    const data = await this.YouTube.VideoData()
+    const data = await this.YouTube.VideoData();
     if(data == null){
-      
+      $(".noVideo").removeClass("d-none");
+      $(".yesVideo").addClass("d-none");
     }
+    else{
+      $(".noVideo").addClass("d-none");
+      $(".yesVideo").removeClass("d-none");
+      $("#videoName").html(data.name);
+      $("#videoChannel").html(data.canal);
+      $("#videoDuration").html(data.time.minutos +":"+ data.time.segundos);
+      $("#videoImage").prop("src",data.image);
+    }
+    $(".modal").modal("show")
   }
 }
