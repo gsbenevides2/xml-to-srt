@@ -50,6 +50,7 @@ class YouTube{
     };
     const data1 = await this.googleVideo(parametros);
     const qtdLegendas = data1.getElementsByTagName("track").length;
+    
     if(qtdLegendas == 0){
       this.legends = null
       return null;
@@ -66,8 +67,9 @@ class YouTube{
         }
         legendas.push(legenda)
       }
+      
       this.legends = legendas
-      return legendas
+      return 
     }
   }
   async VideoData(){
