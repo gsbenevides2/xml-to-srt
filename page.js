@@ -33,7 +33,6 @@ class page{
       "option":$("#legendSelect").val()
     }
     await this.YouTube.processLegend(data);
-    console.log(data)
   }
   async submit(){
     const data = await this.YouTube.VideoData();
@@ -74,7 +73,6 @@ class page{
         $(".yesLegends").addClass("d-none");
       }
     }
-    console.log(await this.YouTube.legendsData());
     $(".modal").modal("show")
   }
 }

@@ -72,8 +72,24 @@ class YouTube{
       return legendas;
     }
   }
-  async processLegend(legend){
-    
+  async processLegend(legendSelect){
+    const legend = this.legends[legendSelect.option];
+    const parametros = {
+      v:this.id,
+      type:"track",
+      name:legend.name,
+      lang:legend.lang_code
+    }
+    if(legendSelect.traduzir == true){
+      parametros.tlang = "pt"
+    }
+    const xmlData = new xml(await this.googleVideo(parametros));
+    this.legend = xmlData.toSrt();
+    this.dowload();
+  }
+  dowload(){
+    var blob = new Blob([this.legend], {type: "text/plain;charset=utf-8"});
+    saveAs(blob, this.videoName+".srt");
   }
   async VideoData(){
     const parametros = {
@@ -82,6 +98,7 @@ class YouTube{
     };
     const data = await this.youtubeApiV3("videos",parametros);
     if(data.items.length != 0){
+      this.videoName = (data.items[0]).snippet.title;
     return {
       name:(data.items[0]).snippet.title,
       canal:(data.items[0]).snippet.channelTitle,
@@ -92,6 +109,7 @@ class YouTube{
       image:(data.items[0]).snippet.thumbnails.maxres.url
     };
     }
+    
     else{
       return null;
     }
