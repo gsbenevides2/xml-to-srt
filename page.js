@@ -28,17 +28,24 @@ class page{
     }
   }
   async modalSubmit(){
-    
+    var data = {
+      "traduzir":$("#portugueseLegend").prop("checked"),
+      "option":$("#legendSelect").val()
+    }
+    await this.YouTube.processLegend(data);
+    console.log(data)
   }
   async submit(){
     const data = await this.YouTube.VideoData();
     if(data == null){
       $(".noVideo").removeClass("d-none");
       $(".yesVideo").addClass("d-none");
+      $("#formModal button[type=submit]").prop("disabled",true);
     }
     else{
       $(".noVideo").addClass("d-none");
       $(".yesVideo").removeClass("d-none");
+      $("#formModal button[type=submit]").prop("disabled",false);
       $("#videoName").html(data.name);
       $("#videoChannel").html(data.canal);
       $("#videoDuration").html(data.time.minutos +":"+ data.time.segundos);
@@ -56,12 +63,14 @@ class page{
             text += " - "+ name;
           }
           var element = document.createElement("option");
+          element.setAttribute("value",i)
           element.innerHTML = text;
-          document.getElementById("legendSelect").appendChild(element)
+          document.getElementById("legendSelect").appendChild(element);
         }
       }
       else{
         $(".noLegends").removeClass("d-none");
+        $("#formModal button[type=submit]").prop("disabled",true);
         $(".yesLegends").addClass("d-none");
       }
     }

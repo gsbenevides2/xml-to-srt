@@ -52,25 +52,28 @@ class YouTube{
     const qtdLegendas = data1.getElementsByTagName("track").length;
     
     if(qtdLegendas == 0){
-      this.legends = null
+      this.legends = null;
       return null;
     }
     else{
       const legendas = [];
       for(let i = 0;i<qtdLegendas;i++){
-        const legendaXml = data1.getElementsByTagName("track")[i]
+        const legendaXml = data1.getElementsByTagName("track")[i];
         const legenda = {
           id:legendaXml.getAttribute("id"),
           name:legendaXml.getAttribute("name"),
           lang_code:legendaXml.getAttribute("lang_code"),
           lang_name: await this.traduzir(legendaXml.getAttribute("lang_translated"))
         }
-        legendas.push(legenda)
+        legendas.push(legenda);
       }
       
-      this.legends = legendas
-      return 
+      this.legends = legendas;
+      return legendas;
     }
+  }
+  async processLegend(legend){
+    
   }
   async VideoData(){
     const parametros = {
