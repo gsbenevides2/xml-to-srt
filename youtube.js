@@ -79,9 +79,9 @@ class YouTube{
       type:"track",
       name:legend.name,
       lang:legend.lang_code
-    }
+    };
     if(legendSelect.traduzir == true){
-      parametros.tlang = "pt"
+      parametros.tlang = "pt";
     }
     const xmlData = new xml(await this.googleVideo(parametros));
     this.legend = xmlData.toSrt();

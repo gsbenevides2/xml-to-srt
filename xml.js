@@ -21,7 +21,7 @@ class xml{
       var segundoArray = segundo.split(".");
       segundoArray[0]= duas_casas(segundoArray[0]);
       if(segundoArray.length == 1){
-        segundoArray.push("000")
+        segundoArray.push("000");
       }
       else if(segundoArray[1].length > 3){
         segundoArray[1] = segundoArray[1].slice(0,3);

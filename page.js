@@ -8,23 +8,23 @@ class page{
     $("#form").submit(()=>{
       pageElement.submit();
       return false;
-    })
+    });
     $("#formModal").submit(()=>{
       pageElement.modalSubmit();
       return false;
-    })
+    });
     
   }
   labelAltered(label){
     const value = $("#urlLabel").val();
-    const result = this.YouTube.Url(value)
+    const result = this.YouTube.Url(value);
     if(result === true){
-      $("#button1").prop("disabled",false)
-      $("#urlHelper").addClass("d-none")
+      $("#button1").prop("disabled",false);
+      $("#urlHelper").addClass("d-none");
     }
     else{
-      $("#button1").prop("disabled",true)
-      $("#urlHelper").removeClass("d-none")
+      $("#button1").prop("disabled",true);
+      $("#urlHelper").removeClass("d-none");
     }
   }
   async modalSubmit(){
@@ -33,7 +33,7 @@ class page{
       "option":$("#legendSelect").val()
     };
     await this.YouTube.processLegend(data);
-    await $(".modal").modal("hide");
+    $(".modal").modal("hide");
     this.dowload();
   }
   dowload(){
@@ -61,14 +61,14 @@ class page{
         $(".yesLegends").removeClass("d-none");
         for(let i =0;i<legendsData.length;i++){
           const legend = legendsData[i];
-          const name = legend.name
+          const name = legend.name;
           const language = legend.lang_name;
-          var text = language
+          var text = language;
           if(name != ""){
             text += " - "+ name;
           }
           var element = document.createElement("option");
-          element.setAttribute("value",i)
+          element.setAttribute("value",i);
           element.innerHTML = text;
           document.getElementById("legendSelect").appendChild(element);
         }
@@ -79,6 +79,6 @@ class page{
         $(".yesLegends").addClass("d-none");
       }
     }
-    $(".modal").modal("show")
+    $(".modal").modal("show");
   }
 }
