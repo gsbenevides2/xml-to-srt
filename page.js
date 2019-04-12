@@ -34,7 +34,7 @@ class page{
     };
     await this.YouTube.processLegend(data);
     this.dowload();
-    $(".modal").modal("close");
+    $(".modal").modal("hide");
   }
   dowload(){
     var blob = new Blob([this.YouTube.legend], {type: "text/plain;charset=utf-8"});
