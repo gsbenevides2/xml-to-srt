@@ -31,8 +31,14 @@ class page{
     var data = {
       "traduzir":$("#portugueseLegend").prop("checked"),
       "option":$("#legendSelect").val()
-    }
+    };
     await this.YouTube.processLegend(data);
+    this.dowload();
+    $(".modal").modal("close");
+  }
+  dowload(){
+    var blob = new Blob([this.YouTube.legend], {type: "text/plain;charset=utf-8"});
+    saveAs(blob, this.YouTube.videoName+".srt");
   }
   async submit(){
     const data = await this.YouTube.VideoData();

@@ -85,11 +85,7 @@ class YouTube{
     }
     const xmlData = new xml(await this.googleVideo(parametros));
     this.legend = xmlData.toSrt();
-    this.dowload();
-  }
-  dowload(){
-    var blob = new Blob([this.legend], {type: "text/plain;charset=utf-8"});
-    saveAs(blob, this.videoName+".srt");
+    
   }
   async VideoData(){
     const parametros = {
