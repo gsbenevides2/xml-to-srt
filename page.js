@@ -33,8 +33,8 @@ class page{
       "option":$("#legendSelect").val()
     };
     await this.YouTube.processLegend(data);
+    await $(".modal").modal("hide");
     this.dowload();
-    $(".modal").modal("hide");
   }
   dowload(){
     var blob = new Blob([this.YouTube.legend], {type: "text/plain;charset=utf-8"});
