@@ -23,7 +23,7 @@ class YouTube{
     for(var i =0;i<qtdParametros;i++){
       url += listaParametros[i]+"="+parametros[listaParametros[i]] +"&";
     }
-    url += "key=AIzaSyB6_ew7FHttmvF6PKumFU48USX-e2DvrHA";
+    url += "key=AIzaSyBII7L44auzJSKZbYoJ3YwGFKMcjoIvaDI";
     return await this.request(url);
   }
   async googleVideo(parametros){
