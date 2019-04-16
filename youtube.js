@@ -72,6 +72,32 @@ class YouTube{
       return legendas;
     }
   }
+  async legendAutomatic(){
+    const data = await $.get("https://youtube.com/get_video_info?video_id="+this.id);
+    const decodedData = decodeURIComponent(data);
+    if (!decodedData.includes('captionTracks')){
+      return null;
+    }
+    else{
+      const regex = /({"captionTracks":.*isTranslatable":(true|false)}])/;
+      const [match] = regex.exec(decodedData);
+      const  captionTracks  = JSON.parse(`${match}}`);
+      for(var i = 0;i<captionTracks.captionTracks.length;i++){
+        const propertyKind = ((captionTracks.captionTracks[i]).kind);
+        if(propertyKind == "asr"){
+          var isAsr = true;
+          break;
+        }
+      }
+      if(isAsr === true){
+        this.autoCaptionURL = (captionTracks.captionTracks[i]).baseUrl;
+        return true;
+      }
+      else{
+        return null;
+      }
+    }
+  }
   async processLegend(legendSelect){
     const legend = this.legends[legendSelect.option];
     const parametros = {
