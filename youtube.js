@@ -73,7 +73,22 @@ class YouTube{
     }
   }
   async legendAutomatic(){
-    const data = await $.get("https://youtube.com/get_video_info?video_id="+this.id);
+    await $.ajax({
+      type: "GET",
+      url: "https://youtube.com/get_video_info",
+      data: { html5:1,video_id: this.id },
+      dataType: "text",
+      success: function (response) {
+        alert('success');
+      },
+      error: function (error) {
+        alert('error');
+        console.log(error)
+      },
+      complete: function () {
+        alert('complete');
+      }
+    });
     const decodedData = decodeURIComponent(data);
     if (!decodedData.includes('captionTracks')){
       return null;
