@@ -73,6 +73,7 @@ class YouTube{
     }
   }
   async legendAutomatic(){
+    /*
     await $.ajax({
       type: "GET",
       url: "https://youtube.com/get_video_info",
@@ -89,6 +90,8 @@ class YouTube{
         alert('complete');
       }
     });
+    */
+    var data = (await firebase.functions().httpsCallable('get_video_info')({id:this.id})).result;
     const decodedData = decodeURIComponent(data);
     if (!decodedData.includes('captionTracks')){
       return null;
