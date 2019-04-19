@@ -56,7 +56,7 @@ class page{
       $("#videoDuration").html(data.time.minutos +":"+ data.time.segundos);
       $("#videoImage").prop("src",data.image);
       const legendsData = await this.YouTube.legendsData();
-      await this.YouTube.legendAutomatic();
+      //await this.YouTube.legendAutomatic();
       if(legendsData != null){
         $(".noLegends").addClass("d-none");
         $(".yesLegends").removeClass("d-none");

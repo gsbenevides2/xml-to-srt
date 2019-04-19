@@ -46,11 +46,12 @@ class YouTube{
   async legendsData(){
     const parametros = {
       type:"list",
-      v:this.id
+      v:this.id,
+      tlangs:1
     };
     const data1 = await this.googleVideo(parametros);
     const qtdLegendas = data1.getElementsByTagName("track").length;
-    
+    const qtdTraducoes = data1.getElementsByTagName("target").length;
     if(qtdLegendas == 0){
       this.legends = null;
       return null;
@@ -67,30 +68,15 @@ class YouTube{
         }
         legendas.push(legenda);
       }
-      
+      if(qtdTraducoes > 0){
+        const traducoes = [];
+      }
       this.legends = legendas;
       return legendas;
     }
   }
+  /*
   async legendAutomatic(){
-    /*
-    await $.ajax({
-      type: "GET",
-      url: "https://youtube.com/get_video_info",
-      data: { html5:1,video_id: this.id },
-      dataType: "text",
-      success: function (response) {
-        alert('success');
-      },
-      error: function (error) {
-        alert('error');
-        console.log(error)
-      },
-      complete: function () {
-        alert('complete');
-      }
-    });
-    */
     var data = (await firebase.functions().httpsCallable('get_video_info')({id:this.id})).result;
     const decodedData = decodeURIComponent(data);
     if (!decodedData.includes('captionTracks')){
@@ -115,7 +101,7 @@ class YouTube{
         return null;
       }
     }
-  }
+  }*/
   async processLegend(legendSelect){
     const legend = this.legends[legendSelect.option];
     const parametros = {
@@ -131,6 +117,7 @@ class YouTube{
     this.legend = xmlData.toSrt();
     
   }
+  
   async VideoData(){
     const parametros = {
       part:"snippet,contentDetails",

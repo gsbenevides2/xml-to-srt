@@ -2,6 +2,7 @@ class xml{
   constructor(xml){
     this._xml=xml;
   }
+  /*
   XMLToString(){
     const oXML = this._xml;
     if (window.ActiveXObject) {
@@ -46,6 +47,7 @@ class xml{
         });
       });
   }
+  */
   transforma_magicamente(s){
     function duas_casas(numero){
       if (numero <= 9){
