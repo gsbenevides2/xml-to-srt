@@ -56,12 +56,13 @@ class page{
       $("#videoDuration").html(data.time.minutos +":"+ data.time.segundos);
       $("#videoImage").prop("src",data.image);
       const legendsData = await this.YouTube.legendsData();
+      console.log(legendsData)
       //await this.YouTube.legendAutomatic();
       if(legendsData != null){
         $(".noLegends").addClass("d-none");
         $(".yesLegends").removeClass("d-none");
-        for(let i =0;i<legendsData.length;i++){
-          const legend = legendsData[i];
+        for(let i =0;i<legendsData.legendas.length;i++){
+          const legend = legendsData.legendas[i];
           const name = legend.name;
           const language = legend.lang_name;
           var text = language;

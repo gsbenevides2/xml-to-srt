@@ -50,14 +50,16 @@ class YouTube{
       tlangs:1
     };
     const data1 = await this.googleVideo(parametros);
+    const legendas = [];
     const qtdLegendas = data1.getElementsByTagName("track").length;
+    const traducoes = [];
     const qtdTraducoes = data1.getElementsByTagName("target").length;
     if(qtdLegendas == 0){
       this.legends = null;
+      this.traducoes = null;
       return null;
     }
     else{
-      const legendas = [];
       for(let i = 0;i<qtdLegendas;i++){
         const legendaXml = data1.getElementsByTagName("track")[i];
         const legenda = {
@@ -69,10 +71,22 @@ class YouTube{
         legendas.push(legenda);
       }
       if(qtdTraducoes > 0){
-        const traducoes = [];
+        for(let i = 0;i<qtdTraducoes;i++){
+          const traducaoXml = data1.getElementsByTagName("target")[i];
+          const traducao = {
+            id:traducaoXml.getAttribute("id"), 
+            url_frag:traducaoXml.getAttribute("urlfrag"),
+            lang_name: await this.traduzir(traducaoXml.getAttribute("lang_translated"))
+          };
+          traducoes.push(traducao);
+        }
+        this.traducoes = traducoes;
       }
       this.legends = legendas;
-      return legendas;
+      return {
+        traducoes,
+        legendas
+      };
     }
   }
   /*
