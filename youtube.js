@@ -1,5 +1,6 @@
 class YouTube{
   Url(url){
+    this.tabelaList = null;
     this.url = url;
     return this.verificateUrl();
   }
@@ -43,6 +44,17 @@ class YouTube{
     const result = await this.request(url);
     return result.text[0];
   }
+  async tabela(text){
+    if(this.tabelaList == null){
+      this.tabelaList = await $.getJSON("https://raw.githubusercontent.com/gsbenevides2/xml-to-srt/development/languages.json");
+    }
+    if(this.tabelaList.targets.indexOf(text)>=0){
+      return (this.tabelaList.targetsTranslate[this.tabelaList.targets.indexOf(text)]);
+    }
+    else{
+      return await this.traduzir(text);
+    }
+  }
   async legendsData(){
     const parametros = {
       type:"list",
@@ -76,7 +88,7 @@ class YouTube{
           const traducao = {
             id:traducaoXml.getAttribute("id"), 
             url_frag:traducaoXml.getAttribute("urlfrag"),
-            lang_name: await this.traduzir(traducaoXml.getAttribute("lang_translated"))
+            lang_name: await this.tabela(traducaoXml.getAttribute("lang_translated"))
           };
           traducoes.push(traducao);
         }
