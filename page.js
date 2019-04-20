@@ -1,7 +1,6 @@
 class page{
   constructor(){
     this.YouTube = new YouTube();
-    //InputChange
     $("#urlLabel").change(()=>{
       pageElement.labelAltered();
     });
@@ -13,7 +12,6 @@ class page{
       pageElement.modalSubmit();
       return false;
     });
-    
   }
   labelAltered(label){
     const value = $("#urlLabel").val();
@@ -56,7 +54,6 @@ class page{
       $("#videoDuration").html(data.time.minutos +":"+ data.time.segundos);
       $("#videoImage").prop("src",data.image);
       const legendsData = await this.YouTube.legendsData();
-      //await this.YouTube.legendAutomatic();
       if(legendsData.legendas != null){
         $(".noLegends").addClass("d-none");
         $(".yesLegends").removeClass("d-none");

@@ -102,33 +102,6 @@ class YouTube{
       };
     }
   }
-  /*
-  async legendAutomatic(){
-    var data = (await firebase.functions().httpsCallable('get_video_info')({id:this.id})).result;
-    const decodedData = decodeURIComponent(data);
-    if (!decodedData.includes('captionTracks')){
-      return null;
-    }
-    else{
-      const regex = /({"captionTracks":.*isTranslatable":(true|false)}])/;
-      const [match] = regex.exec(decodedData);
-      const  captionTracks  = JSON.parse(`${match}}`);
-      for(var i = 0;i<captionTracks.captionTracks.length;i++){
-        const propertyKind = ((captionTracks.captionTracks[i]).kind);
-        if(propertyKind == "asr"){
-          var isAsr = true;
-          break;
-        }
-      }
-      if(isAsr === true){
-        this.autoCaptionURL = (captionTracks.captionTracks[i]).baseUrl;
-        return true;
-      }
-      else{
-        return null;
-      }
-    }
-  }*/
   async processLegend(legendSelect){
     const legend = this.legends[legendSelect.option];
     const parametros = {
@@ -143,7 +116,6 @@ class YouTube{
     const xmlData = new xml(await this.googleVideo(parametros));
     this.legend = xmlData.toSrt();
   }
-  
   async VideoData(){
     const parametros = {
       part:"snippet,contentDetails",
@@ -162,7 +134,6 @@ class YouTube{
       image:(data.items[0]).snippet.thumbnails.maxres.url
     };
     }
-    
     else{
       return null;
     }

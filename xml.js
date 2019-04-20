@@ -2,52 +2,6 @@ class xml{
   constructor(xml){
     this._xml=xml;
   }
-  /*
-  XMLToString(){
-    const oXML = this._xml;
-    if (window.ActiveXObject) {
-      var oString = oXML.xml; return oString;
-    }
-    else {
-      return (new XMLSerializer()).serializeToString(oXML);
-    }
-  }
-  
-  toSrtAdvanced(){
-    function striptags(html){
-      var div = document.createElement("div");
-      div.innerHTML = html;
-      return  div.textContent || div.innerText || "";
-    }
-    const transcript = thisXMLToString();
-    const lines = transcript
-      .replace('<?xml version="1.0" encoding="utf-8" ?><transcript>', '')
-      .replace('</transcript>', '')
-      .split('</text>')
-      .filter(line => line && line.trim())
-      .map(line => {
-        const startRegex = /start="([\d.]+)"/;
-        const durRegex = /dur="([\d.]+)"/;
-        
-        const [, start] = startRegex.exec(line);
-        const [, dur] = durRegex.exec(line);
-        
-        const htmlText = line
-          .replace(/<text.+>/, '')
-          .replace(/&/gi, '&')
-          .replace(/<\/?[^>]+(>|$)/g, '');
-        
-        const decodedText = he.decode(htmlText);
-        const text = striptags(decodedText);
-        
-        console.log( {
-          start,
-          dur,
-          text,
-        });
-      });
-  }
-  */
   transforma_magicamente(s){
     function duas_casas(numero){
       if (numero <= 9){
@@ -62,7 +16,6 @@ class xml{
     if(segundo== "0"){
       segundo = "00.000";
     }
-    
     var segundoArray = segundo.split(".");
     segundoArray[0]= duas_casas(segundoArray[0]);
     if(segundoArray.length == 1){
@@ -70,7 +23,6 @@ class xml{
     }
     else if(segundoArray[1].length > 3){
       segundoArray[1] = segundoArray[1].slice(0,3);
-      
     }
     else if(segundoArray[1].length < 6){
       var b = 3 - segundoArray[1].length;
@@ -78,7 +30,6 @@ class xml{
         segundoArray[1] += "0";
       }
     }
-    //
     segundo = segundoArray.join(",");
     const formatado = hora + ":" + minuto + ":" + segundo;
     return formatado;
@@ -108,7 +59,6 @@ class xml{
         atualPosition = atualPosition + 1;
         continue;
       }
-      
       const srtTemplante = atualPosition + "\n" + timeInicial + " --> " + timeFinal + "\n" + decodeXml(text) + "\n\n";
       srt += srtTemplante;
       atualPosition = atualPosition + 1;
