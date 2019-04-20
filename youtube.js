@@ -85,7 +85,7 @@ class YouTube{
       if(qtdTraducoes > 0){
         for(let i = 0;i<qtdTraducoes;i++){
           const traducaoXml = data1.getElementsByTagName("target")[i];
-          const urlFrag = (traducaoXml.getAttribute("urlfrag")).slice(1).split("=")[1]
+          const urlFrag = (traducaoXml.getAttribute("urlfrag")).slice(1).split("=")[1];
           const traducao = {
             id:traducaoXml.getAttribute("id"), 
             tlang:urlFrag,

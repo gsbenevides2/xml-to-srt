@@ -85,21 +85,9 @@ class xml{
   }
   toSrt(){
     function decodeXml(string) {
-      /*
-      const escaped_one_to_xml_special_map = {
-        '&amp;': '&',
-        '&quot;': '"',
-        '&lt;': '<',
-        '&gt;': '>'
-      };
-      return string.replace(/(&quot;|&lt;|&gt;|&amp;)/g,
-        function(str, item) {
-          return escaped_one_to_xml_special_map[item];
-        });
-        */
-        var element = document.createElement("p")
-        element.innerHTML = string
-        return element.textContent
+      const element = document.createElement("p");
+      element.innerHTML = string;
+      return element.textContent;
     }
     var srt = "";
     var atualPosition = 1;
