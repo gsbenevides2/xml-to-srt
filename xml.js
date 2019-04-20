@@ -117,7 +117,6 @@ class xml{
       }
       const srtTemplante = atualPosition + "\n" + timeInicial + " --> " + timeFinal + "\n" + decodeXml(text) + "\n\n";
       srt += srtTemplante;
-      break;
       atualPosition = atualPosition + 1;
     }
     srt = srt.slice(0,-1);
