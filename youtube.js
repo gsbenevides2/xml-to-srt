@@ -85,13 +85,10 @@ class YouTube{
       if(qtdTraducoes > 0){
         for(let i = 0;i<qtdTraducoes;i++){
           const traducaoXml = data1.getElementsByTagName("target")[i];
-          const urlFrag = (traducaoXml.getAttribute("urlfrag")).slice(1).split("=")
-          console.log(urlFrag)
+          const urlFrag = (traducaoXml.getAttribute("urlfrag")).slice(1).split("=")[1]
           const traducao = {
             id:traducaoXml.getAttribute("id"), 
-            url_frag:{
-              lang:urlFrag[1]
-            },
+            tlang:urlFrag,
             lang_name: await this.tabela(traducaoXml.getAttribute("lang_translated"))
           };
           traducoes.push(traducao);
@@ -141,11 +138,10 @@ class YouTube{
       lang:legend.lang_code
     };
     if(legendSelect.traduzir != "original"){
-      
+      parametros.tlang = (this.traducoes[legendSelect.traduzir]).tlang;
     }
     const xmlData = new xml(await this.googleVideo(parametros));
     this.legend = xmlData.toSrt();
-    
   }
   
   async VideoData(){
