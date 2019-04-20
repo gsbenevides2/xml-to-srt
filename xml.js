@@ -85,6 +85,7 @@ class xml{
   }
   toSrt(){
     function decodeXml(string) {
+      /*
       const escaped_one_to_xml_special_map = {
         '&amp;': '&',
         '&quot;': '"',
@@ -95,6 +96,10 @@ class xml{
         function(str, item) {
           return escaped_one_to_xml_special_map[item];
         });
+        */
+        var element = document.createElement("p")
+        element.innerHTML = string
+        return element.textContent
     }
     var srt = "";
     var atualPosition = 1;
@@ -115,6 +120,7 @@ class xml{
         atualPosition = atualPosition + 1;
         continue;
       }
+      
       const srtTemplante = atualPosition + "\n" + timeInicial + " --> " + timeFinal + "\n" + decodeXml(text) + "\n\n";
       srt += srtTemplante;
       atualPosition = atualPosition + 1;
