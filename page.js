@@ -1,7 +1,6 @@
 class page{
   constructor(){
     this.YouTube = new YouTube();
-    //InputChange
     $("#urlLabel").change(()=>{
       pageElement.labelAltered();
     });
@@ -13,7 +12,6 @@ class page{
       pageElement.modalSubmit();
       return false;
     });
-    
   }
   labelAltered(label){
     const value = $("#urlLabel").val();
@@ -29,7 +27,7 @@ class page{
   }
   async modalSubmit(){
     var data = {
-      "traduzir":$("#portugueseLegend").prop("checked"),
+      "traduzir":$("#translations").val(),
       "option":$("#legendSelect").val()
     };
     await this.YouTube.processLegend(data);
@@ -56,11 +54,11 @@ class page{
       $("#videoDuration").html(data.time.minutos +":"+ data.time.segundos);
       $("#videoImage").prop("src",data.image);
       const legendsData = await this.YouTube.legendsData();
-      if(legendsData != null){
+      if(legendsData.legendas != null){
         $(".noLegends").addClass("d-none");
         $(".yesLegends").removeClass("d-none");
-        for(let i =0;i<legendsData.length;i++){
-          const legend = legendsData[i];
+        for(let i =0;i<legendsData.legendas.length;i++){
+          const legend = legendsData.legendas[i];
           const name = legend.name;
           const language = legend.lang_name;
           var text = language;
@@ -71,6 +69,18 @@ class page{
           element.setAttribute("value",i);
           element.innerHTML = text;
           document.getElementById("legendSelect").appendChild(element);
+        }
+        var element = document.createElement("option");
+        element.setAttribute("value","original");
+        element.innerHTML = "Original";
+        document.getElementById("translations").appendChild(element);
+        for(let i = 0;i<legendsData.traducoes.length;i++){
+          const traducao = legendsData.traducoes[i];
+          const name = "Traduzido para "+traducao.lang_name;
+          var element = document.createElement("option");
+          element.setAttribute("value",i);
+          element.innerHTML = name;
+          document.getElementById("translations").appendChild(element);
         }
       }
       else{
