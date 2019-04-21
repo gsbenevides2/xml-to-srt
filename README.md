@@ -14,6 +14,9 @@ Esse projeto converte legendas do youtube em xml em srt.<br>
 	- Branch _master_ como principal.
 	- Branch _gh-pages_ para Github Pages e Arquivos mimificados.
 	- Insues para organização do projeto.
-
+- **Versão 2.0**
+	- Download de legendas traduzidas em vários idiomas.
+	- Adicionado Titulo a pagina.
+	- Otimização de dados.
 Versão 1.1<br>
 Feito com :heart: por gsbenevides2
