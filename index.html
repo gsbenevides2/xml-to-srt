@@ -23,6 +23,20 @@
     display:flex;
     justify-content:end;
   }
+  .d-none{
+    display:none;
+  }
+  .w-100{
+    width:100%;
+  }
+  .alert-danger{
+    background-color:#ff6f60;
+    color:#ab000d;
+    text-align:center;
+    padding:10px;
+    border:1px solid #ab000d;
+    border-radius:10px 10px 10px 10px;
+  }
 </style>
 <body>
   <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
@@ -49,20 +63,10 @@
     </div>
   </div>
   <dialog class="mdl-dialog">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">
-            Titulo da Modal
-          </h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
         <form id="formModal">
-        <div class="modal-body">
+        <div class="mdl-dialog__content">
           <div class="noVideo d-none">
-            <div class="alert alert-danger">Video não Encontrado</div>
+            <div class="alert-danger">Video não Encontrado</div>
           </div>
           <div class="yesVideo d-none">
             <img id="videoImage" class="w-100">
@@ -72,29 +76,30 @@
               <b>Duração: </b><span id="videoDuration"></span>
             </p>
             <div class="noLegends d-none">
-              <div class="alert alert-danger">Esse video não tem legemdas</div>
+              <div class="alert-danger">Esse video não tem legemdas</div>
             </div>
             <div class="yesLegends d-none">
-              <div class="form-group">
-                <label for="legendSelect">Selecione a Legenda</label>
-                <select class="form-control" id="legendSelect">
+              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-dirty">
+                <label class="mdl-textfield__label" for="legendSelect">Selecione a Legenda</label>
+                
+                <select type="select" class="mdl-textfield__input" id="legendSelect">
+                  <option id="op1">True</option>
                 </select>
               </div>
-              <div class="form-group">
-                <label for="traslations">Selecione a tradução</label>
-                <select class="form-control" id="translations">
+              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-dirty">
+                <label class="mdl-textfield__label" for="traslations">Selecione a tradução</label>
+                <select class="mdl-textfield__input" id="translations">
+                  <option value="original">Original</option>
                 </select>
               </div>
             </div>
           </div>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-          <button type="submit" class="btn btn-primary">Download</button>
+        <div class="mdl-dialog__actions">
+          <button type="submit" class="mdl-button mdl-js-button mdl-button--raised  mdl-js-ripple-effect mdl-button--accent">Download</button>
+          <button type="button" class="mdl-button mdl-js-button mdl-button--raised  mdl-js-ripple-effect mdl-button--colored close">Fechar</button>
         </div>
         </form>
-      </div>
-    </div>
   </dialog>
   <script src="page.js"></script>
   <script src="xml.js" ></script>

@@ -12,6 +12,9 @@ class page{
       pageElement.modalSubmit();
       return false;
     });
+    $(".close").click(()=>{
+      $("dialog")[0].close();
+    });
   }
   labelAltered(label){
     const value = $("#urlLabel").val();
@@ -20,9 +23,15 @@ class page{
       $("#button1").prop("disabled",false);
       $(".mdl-textfield").removeClass("is-invalid");
     }
-    else{
-      $("#button1").prop("disabled",true);
-      $(".mdl-textfield").addClass("is-invalid");
+    else if(result === false){
+      if(value != ""){
+        $("#button1").prop("disabled",true);
+        $(".mdl-textfield").addClass("is-invalid");
+      }
+      else{
+        $("#button1").prop("disabled",true);
+        $(".mdl-textfield").removeClass("is-invalid");
+      }
     }
   }
   async modalSubmit(){
@@ -31,7 +40,7 @@ class page{
       "option":$("#legendSelect").val()
     };
     await this.YouTube.processLegend(data);
-    $(".modal").modal("hide");
+    $("dialog")[0].close();
     this.dowload();
   }
   dowload(){
@@ -54,7 +63,7 @@ class page{
       $("#videoDuration").html(data.time.minutos +":"+ data.time.segundos);
       $("#videoImage").prop("src",data.image);
       const legendsData = await this.YouTube.legendsData();
-      if(legendsData.legendas != null){
+      if(legendsData != null && legendsData.legendas != null){
         $(".noLegends").addClass("d-none");
         $(".yesLegends").removeClass("d-none");
         for(let i =0;i<legendsData.legendas.length;i++){
@@ -65,15 +74,18 @@ class page{
           if(name != ""){
             text += " - "+ name;
           }
-          var element = document.createElement("option");
-          element.setAttribute("value",i);
-          element.innerHTML = text;
-          document.getElementById("legendSelect").appendChild(element);
+          if(i != 0){
+            var element = document.createElement("option");
+            element.setAttribute("value",i);
+            element.innerHTML = text;
+            document.getElementById("legendSelect").appendChild(element);
+          }
+          else{
+            var element = document.getElementById("op1");
+            element.setAttribute("value",i);
+            element.innerHTML = text;
+          }
         }
-        var element = document.createElement("option");
-        element.setAttribute("value","original");
-        element.innerHTML = "Original";
-        document.getElementById("translations").appendChild(element);
         for(let i = 0;i<legendsData.traducoes.length;i++){
           const traducao = legendsData.traducoes[i];
           const name = "Traduzido para "+traducao.lang_name;
@@ -89,6 +101,6 @@ class page{
         $(".yesLegends").addClass("d-none");
       }
     }
-    $(".modal").modal("show");
+    $("dialog")[0].showModal();
   }
 }
