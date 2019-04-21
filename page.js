@@ -18,11 +18,11 @@ class page{
     const result = this.YouTube.Url(value);
     if(result === true){
       $("#button1").prop("disabled",false);
-      $("#urlHelper").addClass("d-none");
+      $(".mdl-textfield").removeClass("is-invalid");
     }
     else{
       $("#button1").prop("disabled",true);
-      $("#urlHelper").removeClass("d-none");
+      $(".mdl-textfield").addClass("is-invalid");
     }
   }
   async modalSubmit(){
