@@ -16,12 +16,14 @@
     margin:0px;
     padding:0px;
   }
-  .mdl-card{
-    min-height:10px;
+  .mdl-layout__content{
+    text-align:center;
+    padding-top:12px;
+    background-color:rgba(0,0,0,.1);
   }
-  .mdl-card__actions{
-    display:flex;
-    justify-content:end;
+  .mdl-card{
+    display:inline-block;
+    min-height:10px;
   }
   .d-none{
     display:none;
@@ -54,12 +56,13 @@
                 <label class="mdl-textfield__label" for="urlLabel">Insira a Url</label>
               <small id="urlHelper" class="mdl-textfield__error">Url Invalida</small>
             </div>
-            <div class="mdl-card__actions mdl--card-border">
+            <div class="mdl-dialog__actions mdl-card__actions mdl-card--border">
               <button id="button1" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" type="submit" disabled>Enviar</button>
             </div>
           </div>
         </div>
       </form>
+      <p>Desenvolvido com &hearts; por Gsbenevides2</p>
     </div>
   </div>
   <dialog class="mdl-dialog">
