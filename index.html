@@ -22,6 +22,10 @@
   .mdl-progress{
     opacity:0;
   }
+  .loading{
+    display: flex;
+    justify-content:center;
+  }
   #progress{
     background-color:rgba(0,0,0,.1);
   }
@@ -54,9 +58,8 @@
     <header class="mdl-layout__header">
       <h2 class="mdl-layout-title">Download de Legendas do Youtube</h2>
     </header>
-    <!-- MDL Progress Bar with Indeterminate Progress -->
     <div id="progress">
-    <div class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
+      <div class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
     </div>
     <div class="mdl-layout__content">
       <form id="form">
@@ -81,6 +84,9 @@
         <div class="mdl-dialog__content">
           <div class="noVideo d-none">
             <div class="alert-danger">Video não Encontrado</div>
+          </div>
+          <div class="loading d-none">
+            <div class="mdl-spinner mdl-spinner--single-color mdl-js-spinner is-active"></div>
           </div>
           <div class="yesVideo d-none">
             <img id="videoImage" class="w-100">

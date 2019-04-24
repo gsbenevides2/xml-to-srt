@@ -16,22 +16,23 @@ class page{
       $("dialog")[0].close();
     });
   }
+  async delay(ms) {
+    return await new Promise(resolve => setTimeout(resolve, ms));
+  }
   async toogleProgressBar(option){
-    async function delay(ms) {
-      return await new Promise(resolve => setTimeout(resolve, ms));
-    }
+    
     if(option){
       var opacidade = parseFloat($(".mdl-progress").css("opacity"));
       for(opacidade;opacidade<=1;opacidade = opacidade +0.1){
         $(".mdl-progress").css("opacity",(opacidade+"").slice(0,3));
-        await delay(350);
+        await this.delay(350);
       }
     }
     else{
       var opacidade = parseFloat($(".mdl-progress").css("opacity"));
       for(opacidade;opacidade>=0;opacidade = ((opacidade -0.1)+"").slice(0,3)){
         $(".mdl-progress").css("opacity",(opacidade+"").slice(0,3));
-        await delay(350);
+        await this.delay(350);
         if(opacidade == 0){
           break;
         }
@@ -57,12 +58,18 @@ class page{
     }
   }
   async modalSubmit(){
+    await $(".yesVideo").hide(1000)
+    await this.delay(1000)
+    $(".mdl-dialog .mdl-dialog__actions").addClass("d-none");
+    $(".loading").removeClass("d-none");
     var data = {
       "traduzir":$("#translations").val(),
       "option":$("#legendSelect").val()
     };
+    await this.delay(500)
     await this.YouTube.processLegend(data);
     $("dialog")[0].close();
+    $(".yesVideo").show()
     this.dowload();
   }
   dowload(){
@@ -70,6 +77,8 @@ class page{
     saveAs(blob, this.YouTube.videoName+".srt");
   }
   async submit(){
+    $(".loading").addClass("d-none");
+    $(".mdl-dialog .mdl-dialog__actions").removeClass("d-none");
     await this.toogleProgressBar(true)
     const data = await this.YouTube.VideoData();
     if(data == null){
