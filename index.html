@@ -19,6 +19,12 @@
   .mdl-layout-title{
     padding-left:20px;
   }
+  .mdl-progress{
+    opacity:0;
+  }
+  #progress{
+    background-color:rgba(0,0,0,.1);
+  }
   .mdl-layout__content{
     text-align:center;
     padding-top:12px;
@@ -48,6 +54,10 @@
     <header class="mdl-layout__header">
       <h2 class="mdl-layout-title">Download de Legendas do Youtube</h2>
     </header>
+    <!-- MDL Progress Bar with Indeterminate Progress -->
+    <div id="progress">
+    <div class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
+    </div>
     <div class="mdl-layout__content">
       <form id="form">
         <div class="mdl-card mdl-shadow--2dp">

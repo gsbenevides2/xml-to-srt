@@ -16,6 +16,28 @@ class page{
       $("dialog")[0].close();
     });
   }
+  async toogleProgressBar(option){
+    async function delay(ms) {
+      return await new Promise(resolve => setTimeout(resolve, ms));
+    }
+    if(option){
+      var opacidade = parseFloat($(".mdl-progress").css("opacity"));
+      for(opacidade;opacidade<=1;opacidade = opacidade +0.1){
+        $(".mdl-progress").css("opacity",(opacidade+"").slice(0,3));
+        await delay(350);
+      }
+    }
+    else{
+      var opacidade = parseFloat($(".mdl-progress").css("opacity"));
+      for(opacidade;opacidade>=0;opacidade = ((opacidade -0.1)+"").slice(0,3)){
+        $(".mdl-progress").css("opacity",(opacidade+"").slice(0,3));
+        await delay(350);
+        if(opacidade == 0){
+          break;
+        }
+      }
+    }
+  }
   labelAltered(label){
     const value = $("#urlLabel").val();
     const result = this.YouTube.Url(value);
@@ -48,6 +70,7 @@ class page{
     saveAs(blob, this.YouTube.videoName+".srt");
   }
   async submit(){
+    await this.toogleProgressBar(true)
     const data = await this.YouTube.VideoData();
     if(data == null){
       $(".noVideo").removeClass("d-none");
@@ -101,6 +124,8 @@ class page{
         $(".yesLegends").addClass("d-none");
       }
     }
-    $("dialog")[0].showModal();
+   this.toogleProgressBar(false)
+   $("dialog")[0].showModal();
+   
   }
 }
