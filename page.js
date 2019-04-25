@@ -58,18 +58,18 @@ class page{
     }
   }
   async modalSubmit(){
-    await $(".yesVideo").hide(1000)
-    await this.delay(1000)
+    await $(".yesVideo").hide(1000);
+    await this.delay(1000);
     $(".mdl-dialog .mdl-dialog__actions").addClass("d-none");
     $(".loading").removeClass("d-none");
     var data = {
       "traduzir":$("#translations").val(),
       "option":$("#legendSelect").val()
     };
-    await this.delay(500)
+    await this.delay(500);
     await this.YouTube.processLegend(data);
     $("dialog")[0].close();
-    $(".yesVideo").show()
+    $(".yesVideo").show();
     this.dowload();
   }
   dowload(){
@@ -79,7 +79,7 @@ class page{
   async submit(){
     $(".loading").addClass("d-none");
     $(".mdl-dialog .mdl-dialog__actions").removeClass("d-none");
-    await this.toogleProgressBar(true)
+    await this.toogleProgressBar(true);
     const data = await this.YouTube.VideoData();
     if(data == null){
       $(".noVideo").removeClass("d-none");
@@ -133,7 +133,7 @@ class page{
         $(".yesLegends").addClass("d-none");
       }
     }
-   this.toogleProgressBar(false)
+   this.toogleProgressBar(false);
    $("dialog")[0].showModal();
    
   }
