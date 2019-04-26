@@ -17,6 +17,10 @@ Esse projeto converte legendas do youtube em xml em srt.<br>
 - **Versão 2.0**
 	- Download de legendas traduzidas em vários idiomas.
 	- Adicionado Titulo a pagina.
-	- Otimização de dados.<br>
-Versão 2.0<br>
+	- Otimização de dados.
+- **Versão 3.0**
+  - Telas de carregamento.
+  - Material Design.
+  - Link para repositorio.<br>
+Versão 3.0<br>
 Feito com :heart: por gsbenevides2

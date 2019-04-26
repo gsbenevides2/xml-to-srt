@@ -2,49 +2,89 @@
 <html>
 <head>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-lite/1.3.0/material.amber-light_blue.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/material-design-lite/1.3.0/material.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.min.js"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Dowload de Legendas do YouTube</title>
 </head>
+<style>
+  body{
+    margin:0px;
+    padding:0px;
+  }
+  .mdl-layout-title{
+    padding-left:20px;
+  }
+  .mdl-progress{
+    opacity:0;
+  }
+  .loading{
+    display: flex;
+    justify-content:center;
+  }
+  #progress{
+    background-color:rgba(0,0,0,.1);
+  }
+  .mdl-layout__content{
+    text-align:center;
+    padding-top:12px;
+    background-color:rgba(0,0,0,.1);
+  }
+  .mdl-card{
+    display:inline-block;
+    min-height:10px;
+  }
+  .d-none{
+    display:none;
+  }
+  .w-100{
+    width:100%;
+  }
+  .alert-danger{
+    background-color:#ff6f60;
+    color:#ab000d;
+    text-align:center;
+    padding:10px;
+    border:1px solid #ab000d;
+    border-radius:10px 10px 10px 10px;
+  }
+</style>
 <body>
-  <div class="container">
-    <h2 class="text-center mt-4">Download de Legendas do Youtube</h2>
-    <div class="container">
+  <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    <header class="mdl-layout__header">
+      <h2 class="mdl-layout-title">Download de Legendas do Youtube</h2>
+    </header>
+    <div id="progress">
+      <div class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
+    </div>
+    <div class="mdl-layout__content">
       <form id="form">
-        <div class="card rounded-lg">
-          <div class="card-body">
-            <div class="form-group">
-              <label for="urlLabel">Insira a Url</label>
-              <input placeholder="Youtube Url" id ="urlLabel"  aria-describedby="urlHelper" class="form-control">
-              <small id="urlHelper" class="d-none text-danger">Url Invalida</small>
+        <div class="mdl-card mdl-shadow--2dp">
+          <div class="mdl-card__supporting-text">
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+              <input id ="urlLabel"  aria-describedby="urlHelper" class="mdl-textfield__input">
+                <label class="mdl-textfield__label" for="urlLabel">Insira a Url</label>
+              <small id="urlHelper" class="mdl-textfield__error">Url Invalida</small>
             </div>
-            <div class="d-flex justify-content-end">
-              <button id="button1" class="btn btn-primary" type="submit" disabled>Enviar</button>
+            <div class="mdl-dialog__actions mdl-card__actions mdl-card--border">
+              <button id="button1" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" type="submit" disabled>Enviar</button>
             </div>
           </div>
         </div>
       </form>
+      <p>Desenvolvido com &hearts; por Gsbenevides2<br><a href="https://github.com/gsbenevides2/xml-to-srt">Saiba Mais</a></p>
     </div>
   </div>
-  <div class="modal">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">
-            Titulo da Modal
-          </h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
+  <dialog class="mdl-dialog">
         <form id="formModal">
-        <div class="modal-body">
+        <div class="mdl-dialog__content">
           <div class="noVideo d-none">
-            <div class="alert alert-danger">Video não Encontrado</div>
+            <div class="alert-danger">Video não Encontrado</div>
+          </div>
+          <div class="loading d-none">
+            <div class="mdl-spinner mdl-spinner--single-color mdl-js-spinner is-active"></div>
           </div>
           <div class="yesVideo d-none">
             <img id="videoImage" class="w-100">
@@ -54,30 +94,31 @@
               <b>Duração: </b><span id="videoDuration"></span>
             </p>
             <div class="noLegends d-none">
-              <div class="alert alert-danger">Esse video não tem legemdas</div>
+              <div class="alert-danger">Esse video não tem legemdas</div>
             </div>
             <div class="yesLegends d-none">
-              <div class="form-group">
-                <label for="legendSelect">Selecione a Legenda</label>
-                <select class="form-control" id="legendSelect">
+              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-dirty">
+                <label class="mdl-textfield__label" for="legendSelect">Selecione a Legenda</label>
+                
+                <select type="select" class="mdl-textfield__input" id="legendSelect">
+                  <option id="op1">True</option>
                 </select>
               </div>
-              <div class="form-group">
-                <label for="traslations">Selecione a tradução</label>
-                <select class="form-control" id="translations">
+              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-dirty">
+                <label class="mdl-textfield__label" for="traslations">Selecione a tradução</label>
+                <select class="mdl-textfield__input" id="translations">
+                  <option value="original">Original</option>
                 </select>
               </div>
             </div>
           </div>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-          <button type="submit" class="btn btn-primary">Download</button>
+        <div class="mdl-dialog__actions">
+          <button type="submit" class="mdl-button mdl-js-button mdl-button--raised  mdl-js-ripple-effect mdl-button--accent">Download</button>
+          <button type="button" class="mdl-button mdl-js-button mdl-button--raised  mdl-js-ripple-effect mdl-button--colored close">Fechar</button>
         </div>
         </form>
-      </div>
-    </div>
-  </div>
+  </dialog>
   <script src="page.js"></script>
   <script src="xml.js" ></script>
   <script src="youtube.js"></script>
