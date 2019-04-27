@@ -1,4 +1,7 @@
 class YouTube{
+  constructor(page){
+    this.page = page;
+  }
   Url(url){
     this.tabelaList = null;
     this.url = url;
@@ -18,7 +21,7 @@ class YouTube{
     }
   }
   async youtubeApiV3(type,parametros){
-    var url = "https://www.googleapis.com/youtube/v3/"+type+"?";
+    var url = "https://www.googleapis.com/youtube/v/"+type+"?";
     const listaParametros = Object.keys(parametros);
     const qtdParametros = listaParametros.length;
     for(var i =0;i<qtdParametros;i++){
@@ -37,7 +40,18 @@ class YouTube{
     return await this.request(url.slice(0,-1));
   }
   async request(url){
-    return await $.get(url);
+    return await $.get(url,(data)=>data).fail(async (error)=>{
+      if(error.status == 404){
+        this.page.error(404)
+      }
+      else{
+        if(error.status == 0){
+          this.page.error(0)
+        }
+        this.requestQtd = this.requestQtd+1
+        return await this.request(url)
+      }
+    });
   }
   async traduzir(text){
     const url = "https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20190308T222210Z.e5566cee85b5528e.2cf9c95b00b1f82525b9282bc22effd7f9144e53&text="+text+"&lang=en-pt";

@@ -1,6 +1,6 @@
 class page{
   constructor(){
-    this.YouTube = new YouTube();
+    this.YouTube = new YouTube(this);
     $("#urlLabel").change(()=>{
       pageElement.labelAltered();
     });
@@ -75,6 +75,9 @@ class page{
   dowload(){
     var blob = new Blob([this.YouTube.legend], {type: "text/plain;charset=utf-8"});
     saveAs(blob, this.YouTube.videoName+".srt");
+  }
+  error(error){
+    console.log(error)
   }
   async submit(){
     $(".loading").addClass("d-none");
