@@ -7,7 +7,7 @@ self.addEventListener('install', function (event) {
         '/xml-to-srt/',
         '/xml-to-srt/index.html',
         '/xml-to-srt/page.js',
-        'xml-to-srt/xml.js',
+        '/xml-to-srt/xml.js',
         '/xml-to-srt/youtube.js',
         '/xml-to-srt/offiline.html',
       ]);
