@@ -4,12 +4,12 @@ self.addEventListener('install', function (event) {
   event.waitUntil(
     caches.open(CACHE_NAME).then(function (cache) {
       return cache.addAll([
-        '/',
-        '/index.html',
-        '/page.js',
-        'xml.js',
-        'youtube.js',
-        'offiline.html',
+        '/xml-to-srt/',
+        '/xml-to-srt/index.html',
+        '/xml-to-srt/page.js',
+        'xml-to-srt/xml.js',
+        '/xml-to-srt/youtube.js',
+        '/xml-to-srt/offiline.html',
       ]);
     })
   );
@@ -39,7 +39,7 @@ self.addEventListener('fetch', function (evt) {
       .catch(() => {
         return caches.open(CACHE_NAME)
           .then((cache) => {
-            return cache.match('offiline.html');
+            return cache.match('/xml-to-srt/offiline.html');
           });
       })
   );
