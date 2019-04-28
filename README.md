@@ -25,6 +25,6 @@ Esse projeto converte legendas do youtube em xml em srt.<br>
 - **Versão 4.0**
   - Icone e cor na barra do browser.
   - Tratamento de erros nas requisições.
-  - PWA(Progressive Web Application).
+  - PWA(Progressive Web Application).<br>
 Versão 4.0<br>
 Feito com :heart: por gsbenevides2
