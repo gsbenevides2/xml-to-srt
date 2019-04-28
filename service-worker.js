@@ -12,7 +12,7 @@ self.addEventListener('install', function (event) {
         'offiline.html',
       ]);
     })
-  )
+  );
 });
 
 self.addEventListener('activate', function activator(event) {
@@ -31,18 +31,16 @@ self.addEventListener('activate', function activator(event) {
 });
 
 self.addEventListener('fetch', function (evt) {
-  // CODELAB: Add fetch event handler here.
-if (evt.request.mode !== 'navigate') {
-  // Not a page navigation, bail.
-  return;
-}
-evt.respondWith(
+  if (evt.request.mode !== 'navigate') {
+    return;
+  }
+  evt.respondWith(
     fetch(evt.request)
-        .catch(() => {
-          return caches.open(CACHE_NAME)
-              .then((cache) => {
-                return cache.match('offiline.html');
-              });
-        })
-);
+      .catch(() => {
+        return caches.open(CACHE_NAME)
+          .then((cache) => {
+            return cache.match('offiline.html');
+          });
+      })
+  );
 });

@@ -42,8 +42,8 @@ class YouTube{
     return await this.request(url.slice(0,-1));
   }
   async request(url){
-    this.requestQtd = 1
-    return await this.requestGo(url)
+    this.requestQtd = 1;
+    return await this.requestGo(url);
   }
   async requestGo(url){
     if(this.requestQtd != 5){
