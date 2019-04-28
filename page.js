@@ -1,6 +1,6 @@
 class page{
   constructor(){
-    this.YouTube = new YouTube();
+    this.YouTube = new YouTube(this);
     $("#urlLabel").change(()=>{
       pageElement.labelAltered();
     });
@@ -76,6 +76,25 @@ class page{
     var blob = new Blob([this.YouTube.legend], {type: "text/plain;charset=utf-8"});
     saveAs(blob, this.YouTube.videoName+".srt");
   }
+  error(error,more){
+    var msg;
+    if(error == 404){
+      msg = "Ops! Não foi possivel encontrar informações.";
+      this.toogleProgressBar(false);
+      $(".mdl-dialog")[0].close();
+    }
+    else if(error == 0){
+      msg =  `Erro de conexão. Tentando pela ${more}° vez.`;
+    }
+    else if(error == "fail"){
+      msg = "Erro não foi possivel se comunicar com servidor. Verifique sua rede.";
+      this.toogleProgressBar(false);
+      $(".mdl-dialog")[0].close();
+    }
+    $(".mdl-snackbar")[0].MaterialSnackbar.showSnackbar({
+      message:msg
+    });
+  }
   async submit(){
     $(".loading").addClass("d-none");
     $(".mdl-dialog .mdl-dialog__actions").removeClass("d-none");
@@ -88,6 +107,7 @@ class page{
     }
     else{
       $(".noVideo").addClass("d-none");
+      $(".yesVideo").show();
       $(".yesVideo").removeClass("d-none");
       $("#formModal button[type=submit]").prop("disabled",false);
       $("#videoName").html(data.name);
