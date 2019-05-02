@@ -43,7 +43,7 @@ class xml{
     var srt = "";
     var atualPosition = 1;
     const items = this._xml.getElementsByTagName("text");
-    for(var i = 10;i<items.length;i++){
+    for(var i = 0;i<items.length;i++){
       const item = items[i];
       const dur = item.getAttribute("dur");
       if(typeof item.childNodes[0] == "undefined"){
